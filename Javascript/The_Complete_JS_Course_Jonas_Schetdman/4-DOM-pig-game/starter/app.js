@@ -20,17 +20,59 @@ activePlayer = 0; // *indentification of the player
 // todo make the dice disappear for the beginnig of the game
 document.querySelector(`.dice`).style.display = 'none';
 
+// todo  reset scores 
+resetScores();
+
+
+//#region  btn-roll
 document.querySelector('.btn-roll').addEventListener('click', function(){
+
     // todo Generate a random number
     var dice = Math.floor(Math.random() * 6) + 1;
-console.log(dice);
 
     // todo display the number 
     var diceDom = document.querySelector(`.dice`);
     diceDom.style.display = 'block';
 
     document.querySelector('img').src = `dice-${dice}.png`
+
+    // todo Update the round Score when the rolled number is not 1
+    if (dice > 1) {
+        // todo add score
+        roundScore += dice;
+        document.getElementById(`current-${activePlayer}`).textContent = roundScore;
+        // scores[activePlayer] = parseInt(document.getElementById(`current-${activePlayer}`).textContent)
+        // scores[activePlayer] = dice;
+    } else {
+        document.querySelector(`.player-${activePlayer}-panel`).classList.toggle('active')
+        // document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active')
+        // todo change player
+        activePlayer ? activePlayer = 0: activePlayer = 1;
+        roundScore = 0;
+
+        // *All Current score at zero
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+
+        document.querySelector(`.player-${activePlayer}-panel`).classList.toggle('active')
+        // document.querySelector(`.player-${activePlayer}-panel`).classList.add('active')
+
+        document.querySelector(`.dice`).style.display = 'none';
+    }
 })
+
+//#endregion
+
+//#region Private Helpers
+
+function resetScores() {
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+}
+
+//#endregion
 
 //* remarks  ON Program
 

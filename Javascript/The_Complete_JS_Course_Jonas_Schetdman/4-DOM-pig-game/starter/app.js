@@ -15,13 +15,26 @@ scores = [0, 0]; // * Scores of the two Players
 roundScore = 0; // * Points accumulated by dice Rolled
 activePlayer = 0; // *indentification of the player
 
-dice = Math.floor(Math.random() * 6) + 1;
 
-// todo Make the dice change the content of the active Player score per rolling
-//! first Way 
-document.querySelector(`#current-${activePlayer}`).textContent = dice;
-// ? second Way innerHtml document.querySelector(`#current-${activePlayer}`).innerHTML = `<em>${dice}</em>`
 
 // todo make the dice disappear for the beginnig of the game
 document.querySelector(`.dice`).style.display = 'none';
 
+document.querySelector('.btn-roll').addEventListener('click', function(){
+    // todo Generate a random number
+    var dice = Math.floor(Math.random() * 6) + 1;
+console.log(dice);
+
+    // todo display the number 
+    var diceDom = document.querySelector(`.dice`);
+    diceDom.style.display = 'block';
+
+    document.querySelector('img').src = `dice-${dice}.png`
+})
+
+//* remarks  ON Program
+
+// todo Make the dice change the content of the active Player score per rolling
+//! first Way 
+//document.querySelector(`#current-${activePlayer}`).textContent = dice;
+// ? second Way innerHtml document.querySelector(`#current-${activePlayer}`).innerHTML = `<em>${dice}</em>`

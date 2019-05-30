@@ -1,6 +1,6 @@
 /* ! todo   Programer: Didier Ukanda
             Date: 21 may 2019
-            but : Look at hte Games Rules
+            but : Look at the Games Rules
 */
 /*
 GAME RULES:

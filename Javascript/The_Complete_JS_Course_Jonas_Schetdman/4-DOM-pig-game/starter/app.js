@@ -1,3 +1,7 @@
+/* ! todo   Programer: Didier Ukanda
+            Date: 21 may 2019
+            but : Look at hte Games Rules
+*/
 /*
 GAME RULES:
 
@@ -10,12 +14,8 @@ GAME RULES:
 */
 
 var scores, roundScore, activePlayer;
-
-scores = [0, 0]; // * Scores of the two Players
-roundScore = 0; // * Points accumulated by dice Rolled
-activePlayer = 0; // *indentification of the player
-
-
+var isGameOver = false;
+initGame();
 
 // todo make the dice disappear for the beginnig of the game
 document.querySelector(`.dice`).style.display = 'none';
@@ -26,6 +26,7 @@ resetScores();
 
 //#region  btn-roll
 document.querySelector('.btn-roll').addEventListener('click', function(){
+        if (!isGameOver) {
 
     // todo Generate a random number
     var dice = Math.floor(Math.random() * 6) + 1;
@@ -44,26 +45,68 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
         // scores[activePlayer] = parseInt(document.getElementById(`current-${activePlayer}`).textContent)
         // scores[activePlayer] = dice;
     } else {
-        document.querySelector(`.player-${activePlayer}-panel`).classList.toggle('active')
-        // document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active')
         // todo change player
-        activePlayer ? activePlayer = 0: activePlayer = 1;
-        roundScore = 0;
-
-        // *All Current score at zero
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-1').textContent = '0';
-
-        document.querySelector(`.player-${activePlayer}-panel`).classList.toggle('active')
-        // document.querySelector(`.player-${activePlayer}-panel`).classList.add('active')
-
-        document.querySelector(`.dice`).style.display = 'none';
+        changePlayer();
     }
+}
 })
 
 //#endregion
 
+
+//#region Button Hold
+document.querySelector('.btn-hold').addEventListener('click', function(){
+if (!isGameOver) {
+    
+    // todo Add the current round Score to the Global score
+    scores[activePlayer] += roundScore;
+    console.log(scores[activePlayer]);
+    
+    // todo Update the UI 
+    document.getElementById(`score-${activePlayer}`).textContent = String(scores[activePlayer]);
+
+    // todo change Player
+    // changePlayer();
+    if (scores[activePlayer] >= 100) {
+        isGameOver = !isGameOver;
+        document.querySelector(`.dice`).style.display = 'none';
+        document.getElementById(`name-${activePlayer}`).textContent = 'Winner';
+        document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active');
+        document.querySelector(`.player-${activePlayer}-panel`).classList.add('winner');
+    } else {
+        changePlayer();
+    }
+}
+})
+//#endregion
+
+
+document.querySelector('.btn-new').addEventListener('click', initGame)
+
+
 //#region Private Helpers
+
+function initGame() {
+    isGameOver = false;
+    activePlayer = 0;   // * Indentification of the player
+        document.querySelector(`.player-${activePlayer}-panel`).classList.remove('winner');
+        scores = [0, 0];    // * Scores of the two Players
+        roundScore = 0;     // * Points accumulated by dice Rolled
+    
+        document.querySelector(`.player-0-panel`).classList.remove('active');
+        document.querySelector(`.player-1-panel`).classList.remove('active');
+        document.querySelector(`.player-0-panel`).classList.add('active');
+    
+        
+        document.getElementById(`score-0`).textContent = scores[0]
+        document.getElementById(`score-1`).textContent = scores[1]
+        
+        document.getElementById(`current-0`).textContent = scores[0]
+        document.getElementById(`current-1`).textContent = scores[1]
+        
+        document.getElementById(`name-0`).textContent = 'Player 1';
+        document.getElementById(`name-1`).textContent = 'Player 2';
+    }
 
 function resetScores() {
     document.getElementById('score-0').textContent = '0';
@@ -72,7 +115,20 @@ function resetScores() {
     document.getElementById('current-1').textContent = '0';
 }
 
-//#endregion
+function changePlayer() {
+    document.querySelector(`.player-${activePlayer}-panel`).classList.toggle('active')
+    // document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active')
+    activePlayer ? activePlayer = 0 : activePlayer = 1;
+    roundScore = 0;
+    // *All Current RoundScore at zero
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+    document.querySelector(`.player-${activePlayer}-panel`).classList.toggle('active');
+    // document.querySelector(`.player-${activePlayer}-panel`).classList.add('active')
+    document.querySelector(`.dice`).style.display = 'none';
+}
+
+
 
 //* remarks  ON Program
 

@@ -509,16 +509,32 @@ c) correct answer (I would use a number for this)
 
 // Lecture: Functions returning functions with closures
 
-function interviewQuestion(job) {
-    return function (name) {
-        if (job === 'designer') {
-            console.log(name + ', can you please explain what UX design is?');
-        } else if (job === 'teacher') {
-            console.log('What subject do you teach, ' + name + '?');
-        } else {
-            console.log('Hello ' + name + ', what do you do?');
-        }
+// function interviewQuestion(job) {
+//     return function (name) {
+//         if (job === 'designer') {
+//             console.log(name + ', can you please explain what UX design is?');
+//         } else if (job === 'teacher') {
+//             console.log('What subject do you teach, ' + name + '?');
+//         } else {
+//             console.log('Hello ' + name + ', what do you do?');
+//         }
+//     }
+// }
+
+// interviewQuestion('teacher')('Didier')
+
+var john = {
+    name: 'john',
+    age: 25,
+    introductionYourself: function(){
+        console.log(`My name is ${this.name} and I'm ${this.age} years old`)
     }
 }
 
-interviewQuestion('teacher')('Didier')
+
+var sylvie = {
+    name: 'Sylvie',
+    age: 16,
+}
+
+john.introductionYourself.call(sylvie)

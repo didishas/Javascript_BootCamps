@@ -473,3 +473,36 @@ c) correct answer (I would use a number for this)
     
 })();
 */
+
+
+// function interviewQuestions() {
+//     var job = prompt('What is your job ?')
+//     // alert('Your job is ' + job)
+//     job = job.toLocaleLowerCase();
+//     var name = prompt(`What's your name ? `);
+    
+//     switch (job) {
+//         case 'teacher':
+//             return function () {
+//                 var answer = prompt(`${name}, What do you teach ?`)  
+//                 alert(`${answer} really !`)              
+//             }
+//             break;
+            
+//         case 'designer':
+//             return function (name) {
+//                 var answer = prompt(`${name}, What is your milestone ?`)  
+//                 alert(`${answer} really !`)              
+//             }
+//             break;
+
+//         case 'developer':
+//             return function (name) {
+//                 var answer = prompt(`${name}, Do You code mobile or Web App ?`) 
+//                 alert(`${answer} really !`)               
+//             }
+//             break;
+//     }
+// }
+
+// interviewQuestions()('didier')

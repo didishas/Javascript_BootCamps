@@ -563,6 +563,8 @@ c) // *correct answer (I would use a number for this)
 
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 */
+(function () {
+    
 var Question = function (question, answers, correctAnswer) {
     this.question = question,
     this.answers = answers,
@@ -592,13 +594,13 @@ var Quiz = function(){
         count++
     });
     var answerNumber = prompt('Please read the question in the console and select the correct answer')
-    console.log(answerNumber);
+    // console.log(answerNumber);
     console.log(answerNumber - 1 === randomQuestion.correctAnswer ? 'correct' : 'incorrect')
     console.log(`The right answer is ${randomQuestion.correctAnswer + 1} ${randomQuestion.answers[randomQuestion.correctAnswer]}`);
     
 }
-
 Quiz()
+})();
 
 /* //todo
 --- Expert level ---

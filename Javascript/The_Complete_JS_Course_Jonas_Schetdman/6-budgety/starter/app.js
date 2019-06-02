@@ -83,7 +83,7 @@ var UIController = (function(){
             return {
                 type: document.querySelector(DOMstrings.inputType).value, //? Will be either inc or exp
                 description: document.querySelector(DOMstrings.inputDescription).value,
-                value: document.querySelector(DOMstrings.inputValue).value
+                value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
             };
         },
         // ? Adding New Item in the UI
@@ -179,22 +179,30 @@ var controller = (function(budgetCtrl, UICtrl){
         input = UICtrl.getInput();
         console.log(input);
         
-        // todo 2. Add the new item to the UI 
+        //! validation of input description and value
+        if (input.description !== '' && !isNaN(input.value) && input.value > 0) {
+            // todo 2. Add the new item to the UI 
          newItem = budgetCtrl.addItem(input.type, input.description, input.value)
          
-        // todo 3. Add the item to the budget controller 
-        UIController.addListItem(newItem, input.type);
-
-        // todo 4. Clear the fields
-        UIController.clearFields();
-
-        //#region Look at the updateBudget Function
-        // todo 5. Calculate the budget
-    
-        // todo 6. Display the budget on the UI
-        //#endregion
-        
-        console.log('one button was pressed')
+         // todo 3. Add the item to the budget controller 
+         UIController.addListItem(newItem, input.type);
+ 
+         // todo 4. Clear the fields
+         UIController.clearFields();
+ 
+         //#region Look at the updateBudget Function
+         // todo 5. Calculate the budget
+     
+         // todo 6. Display the budget on the UI
+         //#endregion
+         
+         // todo 5. Calculate and Update Budget
+         updateBudget();
+         console.log('one button was pressed')
+        }
+        else{
+            console.log('everything is empty')
+        }
     }
 
     return {

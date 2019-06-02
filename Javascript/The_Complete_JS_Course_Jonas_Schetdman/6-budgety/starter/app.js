@@ -86,7 +86,7 @@ var UIController = (function(){
                 value: document.querySelector(DOMstrings.inputValue).value
             };
         },
-
+        // ? Adding New Item in the UI
         addListItem: function(obj, type) {
             var html, newHtml, element;
                 
@@ -121,8 +121,20 @@ var UIController = (function(){
                 newHtml = newHtml.replace('%value%', obj.value);
 
                 // todo Insert the Html into the DOM
-                document.querySelector(element).insertAdjacentHTML('beforebegin', newHtml)
+                document.querySelector(element).insertAdjacentHTML('beforebegin', newHtml);
             
+        },
+        //? Clearing the Fields
+        clearFields: function() {
+            var fields, fieldsArr;
+
+            fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue)
+
+            fieldsArr = Array.prototype.slice.call(fields)
+            fieldsArr.forEach(element => {
+                element.value = '';
+            });
+            document.querySelector(DOMstrings.inputDescription).focus(); //! same as fieldsArr[0].focus()
         },
         // ? transforms Html DOMs Classes in variables
         getDOMStrings: function() {
@@ -149,22 +161,39 @@ var controller = (function(budgetCtrl, UICtrl){
             }
             
         })
+    };
+
+    var updateBudget = function () {
+
+        // todo 1. Calculate the budget
+
+        // todo 2. Return the budget
+        
+        // todo 3. Display the budget on the UI
     }
 
     var ctrlAddItem = function() {
         var input, newItem;
+
         // todo 1. Get input values
         input = UICtrl.getInput();
         console.log(input);
         
         // todo 2. Add the new item to the UI 
-        
          newItem = budgetCtrl.addItem(input.type, input.description, input.value)
+         
         // todo 3. Add the item to the budget controller 
         UIController.addListItem(newItem, input.type);
-        // todo 4. Calculate the budget
+
+        // todo 4. Clear the fields
+        UIController.clearFields();
+
+        //#region Look at the updateBudget Function
+        // todo 5. Calculate the budget
     
-        // todo 5. Display the budget on the UI
+        // todo 6. Display the budget on the UI
+        //#endregion
+        
         console.log('one button was pressed')
     }
 

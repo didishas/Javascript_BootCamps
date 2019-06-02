@@ -33,6 +33,33 @@ var budgetController = (function(){
         // allIncomes: [],
         // totalExpenses: 0
     }
+
+    // !
+    return {
+        addItem: function(type, des, val) {
+            var newItems, ID;
+
+            //* Create a new id
+            ID = (data.allItems[type].length <= 0 ? 0 
+                : data.allItems[type][data.allItems[type].length - 1].id + 1);
+
+            // if(type === 'exp'){
+            //     newItems = new Expense(ID, des, val)
+            // }
+            // else{
+            //     newItems = new Income(ID, des, val)
+            // }
+
+            //* Create a new item based on inc or exp
+            newItems = (type === 'exp' ? new Expense(ID, des, val) : new Income(ID, des, val));
+
+            //* Push the new item into the data Structure
+            data.allItems[type].push(newItems);
+
+            //* return the new item
+            return newItems; 
+        }
+    }
     
 })();
 
@@ -45,10 +72,13 @@ var UIController = (function(){
         inputType: '.add__type',
         inputDescription: '.add__description',
         inputValue: '.add__value',
-        inputBtn: '.add__btn'
+        inputBtn: '.add__btn',
+        incomeContainer: '.income__list',
+        expensesContainer: '.expenses__list'
     }
 
     return {
+        // ? takes info from the DOM
         getInput: function() {
             return {
                 type: document.querySelector(DOMstrings.inputType).value, //? Will be either inc or exp
@@ -56,6 +86,45 @@ var UIController = (function(){
                 value: document.querySelector(DOMstrings.inputValue).value
             };
         },
+
+        addListItem: function(obj, type) {
+            var html, newHtml, element;
+                
+                // todo Create Html String with a placeholder text
+
+                if(type === 'inc'){
+                    element = DOMstrings.incomeContainer;
+                    html = '<div class="item clearfix" id="income-%id%">'
+                            +'<div class="item__description">%description%</div>'
+                            +'<div class="right clearfix">'
+                                +'<div class="item__value">%value%</div>'
+                                +'<div class="item__delete">'
+                                    +'<button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>'
+                                +'</div>'
+                            +'</div>'
+                        +'</div>';
+                    }else if(type === 'exp'){
+                        element = DOMstrings.expensesContainer;
+                        html = '<div class="item clearfix" id="expense-%id%">'
+                                +'<div class="item__description">%description%</div>'
+                                +'<div class="right clearfix">'
+                                    +'<div class="item__value">%value%</div>'
+                                    +'<div class="item__delete">'
+                                        +'<button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>'
+                                    +'</div>'
+                                +'</div>'
+                            +'</div>';
+                }
+                // todo Replace the placeholder with  some actual data
+                newHtml = html.replace('%id%', obj.id);
+                newHtml = newHtml.replace('%description%', obj.description);
+                newHtml = newHtml.replace('%value%', obj.value);
+
+                // todo Insert the Html into the DOM
+                document.querySelector(element).insertAdjacentHTML('beforebegin', newHtml)
+            
+        },
+        // ? transforms Html DOMs Classes in variables
         getDOMStrings: function() {
             return DOMstrings;
         }
@@ -83,15 +152,16 @@ var controller = (function(budgetCtrl, UICtrl){
     }
 
     var ctrlAddItem = function() {
-        
+        var input, newItem;
         // todo 1. Get input values
-        var input = UICtrl.getInput();
+        input = UICtrl.getInput();
         console.log(input);
         
         // todo 2. Add the new item to the UI 
-    
+        
+         newItem = budgetCtrl.addItem(input.type, input.description, input.value)
         // todo 3. Add the item to the budget controller 
-    
+        UIController.addListItem(newItem, input.type);
         // todo 4. Calculate the budget
     
         // todo 5. Display the budget on the UI

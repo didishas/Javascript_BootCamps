@@ -145,6 +145,13 @@ var UIController = (function(){
         dateLabel: '.budget__title--month'
     };
 
+     // homemade forEach
+     var nodeListForeach = function(list, callback){
+        for (let index = 0; index < list.length; index++) {
+            callback(list[index], index);                    
+        }
+    };
+
     //? format of currencies Number decimales thousands
     var formatNumber = function(number, type) {
         var numSplit, int , dec, sign;
@@ -238,13 +245,6 @@ var UIController = (function(){
         displayPercentage: function(percentages){
             var fields = document.querySelectorAll(DOMstrings.expPercLabel);
 
-            // homemade forEach
-            var nodeListForeach = function(list, callback){
-                for (let index = 0; index < list.length; index++) {
-                    callback(list[index], index);                    
-                }
-            }
-
             nodeListForeach(fields, function(current, index){
                 current.textContent = percentages[index] > 0 ? percentages[index] + ' %': '---';
             })
@@ -259,7 +259,22 @@ var UIController = (function(){
             month = now.getMonth();
 
             document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
-        },      
+        },   
+        //? change color when changing type 
+        changeType: function(){
+            var fields, button;
+            fields = document.querySelectorAll(
+                DOMstrings.inputType +',' + 
+                DOMstrings.inputDescription + ',' + 
+                DOMstrings.inputValue);
+            button = document.querySelector(DOMstrings.inputBtn)
+
+            nodeListForeach(fields, function(current){
+                current.classList.toggle('red-focus')
+            })
+            button.classList.toggle('red')
+            
+        },
         // ? transforms Html DOMs Classes in variables
         getDOMStrings: function() {
             return DOMstrings;
@@ -288,6 +303,8 @@ var controller = (function(budgetCtrl, UICtrl){
 
         //? 
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem)
+
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changeType)
     };
 
     var updateBudget = function () {

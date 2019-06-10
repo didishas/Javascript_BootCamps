@@ -24,34 +24,87 @@
         // }
         // first();
 
-        //* second attemp
+        //* second attemp : CALL BACKS HELL
 
-        const getRecipe = () => {
+        // const getRecipe = () => {
+        //     // Calling the data from the server
+        //     setTimeout(() => {
+        //         const recipeID = [456,562,123,756];
+        //         console.log(recipeID);
+
+        //         //receiving the recipe data from server
+        //         setTimeout((id) => {
+        //             const recipe ={
+        //                 title: 'Fresh Tomato Pasta',
+        //                 publisher: 'Catherine'
+        //             }
+        //             // console.log(recipe)
+        //             console.log(`${id}: ${recipe.title}`);
+
+        //             //receiving publisher data
+        //             setTimeout(publisher => {
+        //                 console.log(`publisher: ${recipe.publisher}`)
+        //             }, 2300);
+                    
+        //         }, 2500, recipeID[2]);
+                
+        //     },1500);
+        // }
+
+        // getRecipe();
+
+        // Using Promises
+
+        const getIDS = new Promise((resolve, reject) => {
+
             // Calling the data from the server
             setTimeout(() => {
                 const recipeID = [456,562,123,756];
-                console.log(recipeID);
-
-                //receiving the recipe data from server
+                resolve(recipeID);                
+            }, 1500);            
+        })
+        
+        
+        // //receiving the recipe data from server
+        const getRecipe = function (RecID){
+            return new Promise((resolve,reject) => {
+            
                 setTimeout((id) => {
                     const recipe ={
                         title: 'Fresh Tomato Pasta',
                         publisher: 'Catherine'
                     }
                     // console.log(recipe)
-                    console.log(`${id}: ${recipe.title}`);
-
-                    //receiving publisher data
-                    setTimeout(publisher => {
-                        console.log(`publisher: ${recipe.publisher}`)
-                    }, 2300);
-                    
-                }, 2500, recipeID[2]);
-                
-            },1500);
+                    resolve({id: id, recipe: recipe});
+                }, 2500, RecID)            
+            });
+        }
+        
+        //receiving publisher data
+        
+        const getPublisher = (Publi,recipeDetails) => {
+            return new Promise((resolve, reject) =>{
+                setTimeout(publisher => {
+                    resolve(recipeDetails.publisher = publisher)
+                }, 2300, Publi);
+            })
         }
 
-        getRecipe();
+
+        getIDS
+        .then(function(recipiesIds){
+            console.log(recipiesIds)
+            return getRecipe(recipiesIds[2])
+        })
+        .then(function(recipeDetails){
+            console.log(`${recipeDetails.id}: ${recipeDetails.recipe.title}`)
+            return getPublisher('Jonas', recipeDetails)
+        })
+        .then(function(publisherDetails){
+            console.log(publisherDetails);
+            
+        })
+        
     </script>
 </body>
 </html>

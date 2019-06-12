@@ -321,6 +321,7 @@
                         UIController.DisplayCallingCode(country);
                     
                     })
+                    .catch(error => console.log(error))
                 }
                 
             }
@@ -394,6 +395,7 @@
                         UICtlr.DisplayTemp(weather)
                         UICtlr.DisplayCountryInfos(weather)
                     })
+                    .catch(error => console.log(error))
 
                 // formatting Url
                 // sending url

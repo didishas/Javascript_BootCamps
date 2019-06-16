@@ -24,3 +24,4 @@ WEBPACK/webpacktut/node_modules/.bin/uglifyjs
 WEBPACK/webpacktut/node_modules/.bin/webpack
 WEBPACK/webpacktut/node_modules/.bin/webpack-cli
 WEBPACK/webpacktut/node_modules/.bin/which
+package-lock.json

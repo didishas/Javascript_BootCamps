@@ -1,42 +1,6 @@
 import Search from './models/Search';
-
-//#region All 3 way to import modules
-// //! first way to import thing as simple files
-// import str from './models/Search'
-
-// //! second way import thing as aliases
-// // import {Add as a , Multiply as m, Substract as s, Divide as d, ID} from './views/searchView'
-
-// //! Third way alias the Path
-// import * as searchView  from './views/searchView'
-
-// console.log(`Using the Imported functions ${searchView.Add(searchView.ID, 2)}`)
-//#endregion
-
-//#region TESTING API
-// todo done for testing API
-// import axios from 'axios'
-// // todo  Forkify Start Up
-// let apiKey, URL, query, proxy;
-
-
-
-// async function getResults(query) {
-//     proxy = 'https://cors-anywhere.herokuapp.com/';
-//     apiKey = 'da30482b2b44851038c25d64c6b944cc';
-//     URL = `${proxy}https://www.food2fork.com/api/search?key=${apiKey}&q=${query}`;
-//     try {
-//         const res = await axios(`${URL}`);
-//         const recipes = res.data.recipes;
-//         console.log(res);
-//     } catch (error) {
-//         alert(error)
-//     }
-    
-// }
-
-// getResults('pizza');
-//#endregion
+import * as SearchViews from './views/searchView';
+import { elements, renderLoader, clearLoader } from './views/base'
 
 
 /** Gobal State of App
@@ -46,9 +10,42 @@ import Search from './models/Search';
  * todo Liked recipes
  */
  
+const state = {};
 
-const search = new Search('pizza');
+const controlSearch = async () => {
+    
+    // todo 1. Get query from the view
+    
+    const query = SearchViews.getInput();
+    console.log(query);
+    console.log(SearchViews.ID);
+    
+    if (query) {
+        // todo 2. New Search Object and add to the State
+        state.search = new Search(query);
+        
+        // todo 3. Prepare Ui for result
+        SearchViews.clearInput();
+        SearchViews.clearResult();
+        renderLoader(elements.searchRes)
+        
+        
+        // todo 4. Search for recipe
+        await state.search.getResults();
 
-search.getResults();
+        // todo 5. Render result on UI
+        //* console.log(state.search.result)
+        clearLoader();
+        SearchViews.renderResults(state.search.result);
+    }
+    
+}
+
+elements.searchForm.addEventListener('submit', e => {
+    e.preventDefault();
+    controlSearch();
+})
+
+
 
 

@@ -1,0 +1,32 @@
+form {
+    height: 200px;
+    width: 300px;
+    padding: 30px 50px;
+    background: rgba(0, 0, 0, 0.171);
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+input[type=text] {
+    height: 30px;
+    width: 200px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    outline: none;
+    border: none;
+}
+
+input[type = submit] {
+    margin: 20px auto;
+    display: block;
+    border-style: none;
+    background-color: crimson;
+    padding: 10px 50px;
+    font-family: arial;
+    color: white;
+}
+
+.feedback {
+    text-align: center;
+}

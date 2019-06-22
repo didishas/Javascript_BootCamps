@@ -6,4 +6,11 @@ fetch(url)
 .then(response => {
     return response.json();
 })
-.then(data => console.log(data))
+.then(data => {
+    let container = document.querySelector('.container')
+    container.textContent = '';
+            data.forEach((cur,index) => {
+                container.insertAdjacentHTML('afterbegin',`<h3>${cur.title}</h3>
+                            <p>completed: ${cur.completed}</p>`)
+            })
+})

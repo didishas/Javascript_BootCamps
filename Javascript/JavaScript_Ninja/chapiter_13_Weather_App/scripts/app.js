@@ -41,11 +41,7 @@ const UpdateImg = function(details) {
     
     let timeSrc = null;
 
-    if(details.weather.IsDayTime) {
-        timeSrc = 'img/day.svg';
-    } else {
-        timeSrc = 'img/night.svg';
-    }
+    timeSrc = details.weather.IsDayTime ? 'img/day.svg' : 'img/night.svg';
     time.setAttribute('src', timeSrc)
 }
 

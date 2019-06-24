@@ -19,10 +19,7 @@ const updateCity = async (city) => {
     const cityInfos = await getCity(city);
     const weather = await getWeather(cityInfos)
     
-    return {
-        cityInfos: cityInfos,
-        weather: weather
-    };
+    return { cityInfos, weather };
 };
 
 const UpdatUI = function(details) {
@@ -45,10 +42,22 @@ const UpdateImg = function(details) {
     time.setAttribute('src', timeSrc)
 }
 
+if (localStorage.city) {
+    cityDetails = updateCity(localStorage.city)
+    .then(details => {
+        console.log(details);
+        UpdatUI(details);
+        UpdateImg(details);
+        if (card.classList.contains('d-none')) 
+            card.classList.remove('d-none');
+    })
+}
+
 cityForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const city = getInputLocation(e);
+    localStorage.city = city;
 
     cityDetails = updateCity(city)
     .then(details => {
@@ -56,7 +65,7 @@ cityForm.addEventListener('submit', (e) => {
         UpdatUI(details);
         UpdateImg(details);
         if (card.classList.contains('d-none')) 
-            card.classList.remove('d-none')
+            card.classList.remove('d-none');
     })
 })
 

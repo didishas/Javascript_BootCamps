@@ -8,6 +8,7 @@ const unit = document.getElementById('unit');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
 
+const foreCast = new ForeCast();
 
 const getInputLocation = (e) => {
     const location = e.target.city.value;
@@ -15,12 +16,6 @@ const getInputLocation = (e) => {
     return location;
 }
 
-const updateCity = async (city) => {
-    const cityInfos = await getCity(city);
-    const weather = await getWeather(cityInfos)
-    
-    return { cityInfos, weather };
-};
 
 const UpdatUI = function(details) {
     cityName.textContent = details.cityInfos.LocalizedName;
@@ -43,7 +38,7 @@ const UpdateImg = function(details) {
 }
 
 if (localStorage.city) {
-    cityDetails = updateCity(localStorage.city)
+    cityDetails = foreCast.updateCity(localStorage.city)
     .then(details => {
         console.log(details);
         UpdatUI(details);
@@ -59,7 +54,7 @@ cityForm.addEventListener('submit', (e) => {
     const city = getInputLocation(e);
     localStorage.city = city;
 
-    cityDetails = updateCity(city)
+    cityDetails = foreCast.updateCity(city)
     .then(details => {
         console.log(details);
         UpdatUI(details);

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Chapiter 16</title>
+</head>
+<body>
+    <div class="box">
+            <div class="container my-5">
+                    <h2 class="mb-5">Recipes</h2>
+                    <ul class="list-group col-md-6">
+                        
+                    </ul>
+                    <form>
+                      <label for="recipe">Add a new recipe:</label>
+                      <div class="input-group col-md-6">
+                            <div class="row">
+                                    <div class="col">
+                                      <input type="text" class="form-control" name="author" id="author" placeholder="Your Name...">
+                                    </div>
+                                    <div class="col">
+                                      <input type="text" class="form-control" name="recipe" id="recipe" placeholder="Recipe name ...">
+                                    </div>
+                                  </div>
+                            <div id="helpId" class="input-group-append">
+                                <button type="submit" class="btn btn-outline-secondary">add</button>
+                            </div>
+                      </div>
+                    </form>
+                    
+                </div>
+    </div>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCHe7jJFmLD12BI53YMdEmeqMIw3m27xWw",
+    authDomain: "ninja-firestore-85427.firebaseapp.com",
+    databaseURL: "https://ninja-firestore-85427.firebaseio.com",
+    projectId: "ninja-firestore-85427",
+    storageBucket: "ninja-firestore-85427.appspot.com",
+    messagingSenderId: "842939496278",
+    appId: "1:842939496278:web:990e50c88af1278b"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script src="./sandbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+body {
+    background: url('./img/StockSnap_5ZGE0P6AVX.jpg') ;
+    background-position: center;
+    background-size: cover;
+}
+
+.box {
+    height: 100%;
+    background-color: #264C1A;
+    opacity: .7;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.container {
+    opacity: 1;
+    color: white;
+}
+

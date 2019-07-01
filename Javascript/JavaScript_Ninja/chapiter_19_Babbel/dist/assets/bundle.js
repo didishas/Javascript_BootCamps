@@ -6,4 +6,4 @@ var greet = function greet(name) {
 
 greet('Cathy');
 greet('Didier');
-greet('link  ');
+console.log(__dirname);

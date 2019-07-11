@@ -8,14 +8,63 @@
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
+    <input type="text" class="search" placeholder="City or State" name="location">
     <ul class="suggestions">
       <li>Filter for a city</li>
       <li>or a state</li>
     </ul>
   </form>
-<script>
+  <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const cities= [];
+
+// Components
+const form = document.querySelector('.search-form');
+let list = document.querySelector('ul');
+
+const fillList = (cities) => {
+  list.innerHTML = '';
+  cities.forEach(city => {
+          addLocation(city)
+        })
+}
+const addLocation = (location) => {
+  const html = `<li>
+                  <span class="name">${location.city}, ${location.state}</span>
+                  <span class="population">${location.population}</span>
+                </li>`
+  list.insertAdjacentHTML('beforeend', html)
+}
+
+const findCities = (location, citiesArr) => 
+                    citiesArr.filter(place => {
+                      const regex = new RegExp(location, 'gi');
+                      return place.city.match(regex) || place.state.match(regex);
+                    })
+
+// Older way const findCities = (location, citiesArr) => citiesArr.filter(city => 
+//                                                             ((city.city.toLowerCase().includes(location.toLowerCase())) || 
+//                                                             city.state.toLowerCase().includes(location.toLowerCase())));
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  console.log(e.target.location.value)
+  const location = e.target.location.value;
+
+  fetch(endpoint)
+  .then(data => data.json())
+  .then(data => {
+    // console.log(data)
+    cities.push(...data);
+    console.table(cities);
+    const resultsOfLocation = findCities(location ,cities);
+    console.table(resultsOfLocation)
+    fillList(resultsOfLocation)
+  })
+})
+
+
+
+
 
 </script>
 </body>

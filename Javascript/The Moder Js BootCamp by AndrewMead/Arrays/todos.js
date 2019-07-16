@@ -11,3 +11,5 @@ todos.push('Talk to Mouatassim');
 console.log(todos)
 // Remove the first item from the list
 console.log(todos.shift(), 'is removed from the list');
+
+

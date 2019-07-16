@@ -1,20 +1,34 @@
-const notes = ['Note 1', 'Note 2', 'Note 3']
+const notes = [{
+    title: 'My next trip',
+    body: 'I would like to swim'
+}, {
+    title: 'Habbits to work on',
+    body: 'Exercise. Eating a bit better'
+}, {
+    title: 'Office modifications',
+    body: 'Get a new seat'
+}]
 
-const removedNote = notes.pop();
-console.log(`${removedNote} is removed`);
+// indexOf method
+console.log(notes.indexOf({})); // Doesn't work with Array of Object
 
-console.log(notes.length);
-console.log(notes[notes.length -2]);
+// findIndex method
+const findNote = function (notes, noteTitle) {
+    const index = notes.findIndex(function(note, index) {
+        return note.title.toLowerCase() === noteTitle.toLowerCase();
+    })
+    return [notes[index], `index: ${index}`];
+}
 
-notes.push('My new Note');
+console.log('With the method findIndex');
+console.log(findNote(notes, 'Habbits to work on'));
 
-console.log(notes.length)
-console.log(notes[notes.length - 2])
+// find Method
 
-console.log(notes.shift());
-
-console.log(`I'm going to remove items in middle and add some ...`);
-
-console.log(notes.splice(2, 1, 'new third Note', 'new last note'))
-
-console.log(notes);
+const findNote2 = function(notes, noteTitle){
+    return notes.find(function(note) {
+        return note.title.toLowerCase() === noteTitle.toLowerCase();
+    })
+}
+console.log('With the method find');
+console.log(findNote2(notes, 'Habbits to work on'));

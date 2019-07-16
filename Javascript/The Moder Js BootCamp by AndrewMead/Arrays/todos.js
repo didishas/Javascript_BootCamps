@@ -1,15 +1,30 @@
-let todos = ['Walk in the park', 'Buy a pot for salt', 'Going to the River', 'Do the Milk', 'Pray and Read the Bible'];
+// Convert Array to array of Objects -> text, completed properties
+let todos = [{
+    text:'Walk in the park',
+    completed: false
+    }, {
+        text:'Buy a pot for salt',
+        completed:false
+    }, {
+        text:'Going to the River',
+        completed:false
+    }, {
+        text:'Do the Milk',
+        completed:false
+    }, {
+        text:'Pray and Read the Bible',
+        completed:false
+    }];
 
-console.log(`You have ${todos.length} todos`)
-console.log('First item ->', `Todo: ${todos[0]}`)
-console.log('Second last item ->', `Todo: ${todos[todos.length - 2]}`)
+// Create function to remove a todo by text value
 
-// Delete the third item
-console.log(todos.splice(2, 1), 'is removed from the list')
-// Add a new item onto the end
-todos.push('Talk to Mouatassim');
+const deleteTodo = function(todos, todoText){
+    const index = todos.findIndex(function(todo){
+        return todo.text.toLowerCase() === todoText.toLowerCase();
+    })
+    console.log(todos[index], 'removed')
+    if(index > -1) todos.splice(index, 1);
+}
+
+deleteTodo(todos, 'Buy a pot for salt');
 console.log(todos)
-// Remove the first item from the list
-console.log(todos.shift(), 'is removed from the list');
-
-

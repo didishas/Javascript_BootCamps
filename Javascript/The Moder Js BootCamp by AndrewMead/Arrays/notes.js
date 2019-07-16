@@ -32,3 +32,14 @@ const findNote2 = function(notes, noteTitle){
 }
 console.log('With the method find');
 console.log(findNote2(notes, 'Habbits to work on'));
+
+// filter by text included
+
+const filteredNotes = function(notes, textToFind) {
+    console.log('Start')
+    return notes.filter(function(note) {
+        return (note.title.toLocaleLowerCase().includes(textToFind.toLowerCase()) || note.body.toLocaleLowerCase().includes(textToFind.toLowerCase()));
+    })
+}
+
+console.log('Here is the result ->' ,filteredNotes(notes, 'a'))

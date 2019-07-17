@@ -4,16 +4,16 @@ let todos = [{
     completed: false
     }, {
         text:'Buy a pot for salt',
-        completed:false
+        completed: true
     }, {
         text:'Going to the River',
-        completed:false
+        completed: false
     }, {
         text:'Do the Milk',
-        completed:false
+        completed: true
     }, {
         text:'Pray and Read the Bible',
-        completed:false
+        completed: false
     }];
 
 // Create function to remove a todo by text value
@@ -28,3 +28,25 @@ const deleteTodo = function(todos, todoText){
 
 deleteTodo(todos, 'Buy a pot for salt');
 console.log(todos)
+
+// Challenge just the todos with completed true
+
+const completedTodos = function(todos){
+    return todos.filter(function(todo) {
+        return todo.completed;
+    })
+}
+
+console.log(completedTodos(todos))
+const sorted = todos.sort(function (a,b) {
+    // if(a.completed < b.completed){
+    //     return -1;
+    // }else if(a.completed > b.completed) {
+    //     return 1;
+    // }else {
+    //     return 0;
+    // }
+    return b.completed - a.completed
+})
+console.log(sorted)
+

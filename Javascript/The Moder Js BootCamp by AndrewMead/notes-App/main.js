@@ -1,16 +1,13 @@
 console.log('Starting ...');
 
-const notes = [{
-    title: 'My next trip',
-    body: 'I would like to swim'
-}, {
-    title: 'Habbits to work on',
-    body: 'Exercise. Eating a bit better'
-}, {
-    title: 'Office modifications',
-    body: 'Get a new seat'
-}];
+let notes = [];
 
+// checking if localStorage is empty
+const noteJson = localStorage.getItem('notes');
+
+if(noteJson !== null){
+    notes = JSON.parse(noteJson);
+}
 //Html Elements
 const noteList = document.querySelector('.note-list');
 const createBtn = document.querySelector('#create-btn');
@@ -42,13 +39,18 @@ renderNotes(notes);
 //#region Event Listeners
 createBtn.addEventListener('click', function(e){
     e.preventDefault();
-    display({
-        title: 'New Note',
-        body: 'New instructions'
+    const title = form.elements.newTitle.value;
+    const body = form.elements.newNote.value;
+    notes.push({
+        title: `${title}` || 'unnamed note',
+        body: `${body}`
     })
-    console.log('A note is created.')
+    localStorage.setItem('notes', JSON.stringify(notes));
+    noteList.innerHTML = '';
+    renderNotes(notes);
     console.log(form.elements.newNote.value)
     form.elements.newNote.value = '';
+    form.elements.newTitle.value = '';
 })
 
 form.addEventListener('submit', function(e){

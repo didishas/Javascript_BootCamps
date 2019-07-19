@@ -1,22 +1,13 @@
 console.log('Starting ...');
 
 //My Datas
-let todos = [{
-    text:'Walk in the park',
-    completed: false
-}, {
-    text:'Buy a pot for salt',
-    completed: true
-}, {
-    text:'Going to the River',
-    completed: false
-}, {
-    text:'Do the Milk',
-    completed: true
-}, {
-    text:'Pray and Read the Bible',
-    completed: false
-}];
+let todos = [];
+
+const todosJson = localStorage.getItem('todos');
+
+if(todosJson !== null) {
+    todos = JSON.parse(todosJson);
+}
 
 // Html Elements
 const body = document.querySelector('body');
@@ -90,7 +81,8 @@ form.addEventListener('submit', function(e){
         text: newTodo.value,
         completed: false
     }
-    todos.push(newItem)
+    todos.push(newItem);
+    localStorage.setItem('todos', JSON.stringify(todos))
     newTodo.value = '';
     todoList.innerHTML = '';
     renderTodos(todos, filters)

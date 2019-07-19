@@ -1,7 +1,4 @@
-const noteList = document.querySelector('.note-list');
-const createBtn = document.querySelector('#create-btn');
-const deleteBtn = document.querySelector('#delete-btn');
-const searchText = document.getElementById('search-text');
+console.log('Starting ...');
 
 const notes = [{
     title: 'My next trip',
@@ -12,8 +9,16 @@ const notes = [{
 }, {
     title: 'Office modifications',
     body: 'Get a new seat'
-}]
+}];
 
+//Html Elements
+const noteList = document.querySelector('.note-list');
+const createBtn = document.querySelector('#create-btn');
+const deleteBtn = document.querySelector('#delete-btn');
+const searchText = document.getElementById('search-text');
+const form = document.getElementById('note-form')
+
+//#region Global Functions
 const display = function(note) {
     const html = `
     <li>
@@ -30,22 +35,32 @@ const removeNote = function(note) {
 const renderNotes = function(notes) {
     notes.forEach(note => display(note));
 }
+//#endregion
 
 renderNotes(notes);
 
+//#region Event Listeners
 createBtn.addEventListener('click', function(e){
+    e.preventDefault();
     display({
         title: 'New Note',
         body: 'New instructions'
     })
     console.log('A note is created.')
+    console.log(form.elements.newNote.value)
+    form.elements.newNote.value = '';
 })
 
-// deleteBtn.addEventListener('click', function(e){
-//     const docs = document.querySelectorAll('li')
-//     docs.forEach(doc => removeNote(doc))
-//     console.log('All notes are removed.')
-// })
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    display({
+        title: 'New Note',
+        body: 'New instructions'
+    })
+    console.log(form.elements.newNote.value);
+    form.elements.newNote.value = '';
+    console.log('A note is created.')
+})
 
 searchText.addEventListener('input', function(e){
     console.log(e.target.value);
@@ -53,6 +68,6 @@ searchText.addEventListener('input', function(e){
     const filteredNotes = notes.filter(note => {
         return (note.body.toLowerCase().includes(e.target.value) || note.title.toLowerCase().includes(e.target.value))
     });
-    
     renderNotes(filteredNotes);
 })
+//#endregion

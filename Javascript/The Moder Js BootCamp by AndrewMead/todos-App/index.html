@@ -7,38 +7,57 @@
     <title>Todo App</title>
 </head>
 <body>
-    <h1>Todos</h1>
+    <h1>Todos App</h1>
     <div id="subtitle">
         <h3>
-            <i>Takes notes of all todos</i>
+            Takes notes of all todos
         </h3>
         <div class="container">
-            <input type="text" name="searchText" id="search-todo-text" placeholder="Add Todo ...">
+            <input type="text" name="searchText" id="search-todo-text" placeholder="Filter Todo ...">
         </div>
     </div>
     <section class="todos">
         
     </section>
-    <div class="container">
+    <form class="container" id="todo-form">
         <input type="text" name="addTodo" id="new-todo-text" placeholder="Add Todo ...">
         <button>Add Todo</button>
-    </div>
+    </form>
     <script src="./main.js"></script>
 <style>
+    :root {
+        --background-base: #403129;
+        --main-background-color: #8C862B;
+        --primary-color: #EBF2B3;
+        --optionnal: #F1F0F2;
+    }
     body {
         
-        background-color: #F1F0F2;
-        color: #403129;
+        background-color: var(--background-base);
+        box-sizing: border-box;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: var(--optionnal);
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
         text-align: center;
     }
-    div{
-        background-color: #8C862B;
-        border: .5px solid #8C862B;
+
+    button {
+        border: none;
+        background-color: var(--primary-color);
+        border-radius: 2px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 1.15em;
+        font-weight: 900;
+        color: var(--background-base);
+        padding: .35em;
+    }
+    div, .container{
+        background-color: var(--main-background-color);
+        border: .5px solid var(--main-background-color);
         border-radius: 5px 5px 0 0;
-        color: #EBF2B3;
+        color: var(--primary-color);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         margin: 0 auto;
         width: 600px;
     }
@@ -46,14 +65,48 @@
         margin: 0;
     }
 
+    input {
+        border: none;
+        border-radius: 2px;
+        font-size: 1.15em;
+        margin-bottom: 5px;
+        padding: .40em;
+    }
+    
+    h1 {
+        font-size: 5.5em;
+    }
+
+    h3 {
+        font-size: .75em;
+    }
+
+    #left-todos {
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 1em;
+    }
+
+    #todo-form {
+        border-radius: 5px;
+        padding: 10px 0;
+    }
+
     p.todo {
         border-bottom: 0.35px solid #BBBF39;
         margin-bottom: 0;
     }
+
+    p.todo:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
     section.todos{
         border: .5px solid #8C862B;
         border-radius: 0 0 5px 5px;
         margin: 0 auto;
+        margin-bottom: 15px;
         width: 600px;
         
     }

@@ -9,10 +9,21 @@
 <body>
     <h1>Notes - App</h1>
     <h2>Takes notes and never forget</h2>
+    <div class="container">
+            <input type="text" name="searchText" id="search-text" placeholder="Filter Notes ...">
+        </div>
     <section>
             <ul class="note-list">
             </ul>
     </section>
+
+    <div class="btn-group">
+        <form action="/" method="get">
+            <input type="text" name="newNote" id="new-note" placeholder="Add Note ... ">
+            <button id="create-btn">Create a Note</button>
+        </form>
+        <!-- <button id="delete-btn">Delete All Notes</button> -->
+    </div>
 
     <p>This application was created by Didier Ukanda</p>
     

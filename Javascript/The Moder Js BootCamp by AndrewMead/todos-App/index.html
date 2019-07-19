@@ -12,9 +12,11 @@
         <h3>
             Takes notes of all todos
         </h3>
-        <div class="container">
+        <section class="uncompleted-todo"></section>
+        <form class="container">
             <input type="text" name="searchText" id="search-todo-text" placeholder="Filter Todo ...">
-        </div>
+            <label for="visibleTodos"><input type="checkbox" name="visibleTodos" id="visibleTodos"> Not Completed</label>
+        </form>
     </div>
     <section class="todos">
         
@@ -71,6 +73,10 @@
         font-size: 1.15em;
         margin-bottom: 5px;
         padding: .40em;
+    }
+
+    .invisible {
+        display: none;
     }
     
     h1 {

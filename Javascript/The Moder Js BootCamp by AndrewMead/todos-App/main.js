@@ -20,21 +20,21 @@ let todos = [{
 
 // Html Elements
 const body = document.querySelector('body');
-const sousTitre = document.querySelector('h3');
+const uncompletedTodo = document.querySelector('.uncompleted-todo');
 const todoList = document.querySelector('section.todos');
 const newTodo = document.getElementById('new-todo-text');
 const button = document.querySelector('button');
 const searchTodo = document.querySelector('#search-todo-text');
 const form = document.getElementById('todo-form');
+const headerForm = document.querySelector('form.container')
+
+
+const filters = {
+    searchText: '',
+    hideCompleted: false
+}
 
 //#region Global Functions
-const renderTodos = function(todos) {
-    todos.forEach(todo => {
-        const html = `<p class="todo">${todo.text}</p>`;
-        todoList.insertAdjacentHTML('beforeend', html);
-        console.log(todo.text);
-    });
-}
 
 // Count and Display Uncompleted todo
 const todosLeft = function() {
@@ -44,21 +44,46 @@ const todosLeft = function() {
     }, 0)
     
     console.log(numberOfUndos);
-    
+
+    uncompletedTodo.textContent = '';
     const p = document.createElement('p');
     p.setAttribute('id', 'left-todos')
     p.textContent = `You have ${numberOfUndos} todos left`;
-    sousTitre.insertAdjacentElement('afterend', p)
+    uncompletedTodo.insertAdjacentElement('afterbegin', p)
+}
+
+//Render todos base on filters, adjust uncompleted todos section
+const renderTodos = function(todos, filters) {
+    
+    todosLeft();    
+    let searchedTodos = todos.filter(todo => {
+        return (todo.text.toLocaleLowerCase().includes(filters.searchText.toLowerCase()));
+    })
+    
+    searchedTodos = searchedTodos.filter(todo => {
+        if(filters.hideCompleted) {
+            return !todo.completed;
+        }else {
+            return true;
+        }
+    })
+
+    searchedTodos.forEach(todo => {
+        const html = `<p class="todo">${todo.text}</p>`;
+        todoList.insertAdjacentHTML('beforeend', html);
+        console.log(todo.text);
+    });
+
+
 }
 //#endregion
 
-renderTodos(todos);
-todosLeft();    
+renderTodos(todos, filters);
 
 //#region Event Listeners
 
 // Add a new Todo
-button.addEventListener('click', function(e){
+form.addEventListener('submit', function(e){
     e.preventDefault();
     console.log(newTodo.value);
     const newItem = {
@@ -68,17 +93,22 @@ button.addEventListener('click', function(e){
     todos.push(newItem)
     newTodo.value = '';
     todoList.innerHTML = '';
-    renderTodos(todos)
+    renderTodos(todos, filters)
 });
 
-// Filter Todos
+// Filter Todos and Set Filters
 searchTodo.addEventListener('input', function(e){
     console.log(e.target.value);
+    filters.searchText = e.target.value;
     todoList.innerHTML = '';
     
-    const searchedTodos = todos.filter(todo => {
-        return (todo.text.toLocaleLowerCase().includes(e.target.value.toLowerCase()));
-    })
-    renderTodos(searchedTodos)
+    renderTodos(todos, filters);
 });
 //#endregion
+
+headerForm.elements.visibleTodos.addEventListener('change', (e) => {
+    // console.log(e.target.checked)
+    filters.hideCompleted = e.target.checked;
+    todoList.innerHTML = '';
+    renderTodos(todos, filters);
+})

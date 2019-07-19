@@ -70,4 +70,11 @@ searchText.addEventListener('input', function(e){
     });
     renderNotes(filteredNotes);
 })
+
+form.elements.checkbox.addEventListener('change', () => {
+    console.log('het')
+})
 //#endregion
+
+document.querySelector('select#sorting').addEventListener('change', (e) => console.log(e.target.value));
+

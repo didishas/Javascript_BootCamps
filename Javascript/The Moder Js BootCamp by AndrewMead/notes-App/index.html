@@ -11,6 +11,11 @@
     <h2>Takes notes and never forget</h2>
     <div class="container">
             <input type="text" name="searchText" id="search-text" placeholder="Filter Notes ...">
+            <select name="sorting" id="sorting">
+                <option value="byDate">Sort by last edited</option>
+                <option value="byTitle">Sort by Title</option>
+                <option value="byAlpha">Sort alphabetically</option>
+            </select>
         </div>
     <section>
             <ul class="note-list">
@@ -19,6 +24,7 @@
 
     <div class="btn-group">
         <form action="/" method="get" id="note-form">
+            <p><label for="checkbox"><input type="checkbox" name="checkbox" id="checkbox">checkbox</label></p>
             <input type="text" name="newNote" id="new-note" placeholder="Add Note ... ">
             <button id="create-btn">Create a Note</button>
         </form>

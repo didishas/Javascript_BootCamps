@@ -10,8 +10,8 @@ const getSavedNotes = function () {
 const display = function(note) {
     const html = `
     <li>
-        <label for="titre">Titre: ${note.title}</label>
-        <p>Body: ${note.body}</p>
+        <i class="far fa-trash-alt"></i>   <label for="titre">Titre: ${note.title} </label>
+        <p>Body: ${note.body}</p> 
     </li>`
     document.querySelector('.note-list').insertAdjacentHTML('beforeend', html)
 }

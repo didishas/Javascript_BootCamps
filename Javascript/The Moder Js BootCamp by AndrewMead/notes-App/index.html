@@ -7,6 +7,20 @@
     <script src="https://kit.fontawesome.com/86dabd5a7e.js"></script>
     <title>Note-App</title>
 </head>
+<style>
+    a,
+    a:link,
+    a:visited {
+        color: rgba(218, 165, 32, 0.733);
+        text-decoration: none;
+    }
+    
+    a:hover,
+    a:focus {
+        color: goldenrod;
+        text-decoration: none;
+    }
+</style>
 <body>
     <h1>Notes - App</h1>
     <h2>Takes notes and never forget</h2>
@@ -25,14 +39,14 @@
 
     <div class="btn-group">
         <form action="/" method="get" id="note-form">
-            <p><label for="checkbox"><input type="checkbox" name="checkbox" id="checkbox">checkbox</label></p>
             <input type="text" name="newTitle" id="new-title" placeholder="Add Title ... ">
             <input type="text" name="newNote" id="new-note" placeholder="Add Body ... ">
             <button id="create-btn">Create a Note</button>
         </form>
     </div>
-
+    
     <p>This application was created by Didier Ukanda</p>
+    <script src="./uuidv4.js"></script>
     <script src="./notes-functions.js"></script>
     <script src="./notes-app.js"></script>
 </body>

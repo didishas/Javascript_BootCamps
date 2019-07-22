@@ -1,7 +1,7 @@
 console.log('Starting ...');
 
 // checking if localStorage is empty
-const notes = getSavedNotes();
+let notes = getSavedNotes();
 
 //Html Elements
 const htmlElements = {
@@ -28,7 +28,7 @@ htmlElements.createBtn.addEventListener('click', function(e){
         title: `${htmlElements.form.elements.newTitle.value}` || 'unnamed note',
         body: `${htmlElements.form.elements.newNote.value}`
     })
-    localStorage.setItem('notes', JSON.stringify(notes));
+    saveNotes(notes);
     htmlElements.noteList.innerHTML = '';
     htmlElements.form.elements.newNote.value = '';
     htmlElements.form.elements.newTitle.value = '' ;
@@ -47,6 +47,15 @@ htmlElements.searchText.addEventListener('input', function(e){
     renderNotes(filteredNotes);
 })
 
+window.addEventListener('storage', function(e){
+    if(e.key ===  'notes') {
+        // Parse the new data and update notes
+        notes = JSON.parse(e.newValue);
+        // Rerender the notes
+        htmlElements.noteList.innerHTML = '';
+        renderNotes(notes);
+    }
+})
 //#endregion
 
 

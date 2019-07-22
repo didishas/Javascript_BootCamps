@@ -4,6 +4,10 @@ const getSavedNotes = function () {
     return (noteJson !== null) ? JSON.parse(noteJson) : [];
 }
 
+const saveNotes = function (notes) {
+    localStorage.setItem('notes', JSON.stringify(notes));
+}
+
 //#region Global Functions
 const display = function(note) {
     const html = `
@@ -14,11 +18,14 @@ const display = function(note) {
     document.querySelector('.note-list').insertAdjacentHTML('beforeend', html);
 }
 
-const removeNote = function(note) {
-    note.remove();
+
+const removeNote = function(noteToFound) {
+    const indexNote = notes.findIndex(note => note.id === noteToFound.id);
+    notes.splice(indexNote, 1);
 }
 
 const renderNotes = function(notes) {
+    debugger;
     notes.forEach(note => display(note));
     const trashIcons = document.querySelectorAll('i');
     trashIcons.forEach(trashIcon => {
@@ -27,7 +34,7 @@ const renderNotes = function(notes) {
             e.target.parentNode.remove();
             const indexRemoveNote = notes.findIndex(note => note.id === e.target.parentNode.getAttribute('data-id'));
             notes.splice(indexRemoveNote, 1)
-            localStorage.setItem('notes', JSON.stringify(notes));
+            saveNotes(notes);
         })
     });
 }

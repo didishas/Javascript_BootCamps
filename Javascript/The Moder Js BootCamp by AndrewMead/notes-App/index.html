@@ -31,9 +31,9 @@
     <div class="container">
             <input type="text" name="searchText" id="search-text" placeholder="Filter Notes ...">
             <select name="sorting" id="sorting">
-                <option value="byDate">Sort by last edited</option>
+                <option value="byEdited">Sort by last edited</option>
                 <option value="byTitle">Sort by Title</option>
-                <option value="byAlpha">Sort alphabetically</option>
+                <option value="ByCreated">Sort by Creation</option>
             </select>
         </div>
     <section>
@@ -51,6 +51,7 @@
     
     <p>This application was created by Didier Ukanda</p>
     <script src="./uuidv4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
     <script src="./notes-functions.js"></script>
     <script src="./notes-app.js"></script>
 </body>
